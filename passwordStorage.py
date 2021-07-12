@@ -306,7 +306,7 @@ delete_record_btn = Button(root, text="DELETE RECORD", command=only_delete_recor
 
 show_record_btn = Button(root, text="SHOW RECORDS", command=show_records, padx=20, pady=10).grid(row=4, column=0)
 
-exit_program_btn = Button(root, text="EXIT PROGRAM", command=exit_program, padx=20, pady=10).grid(row=5, column=10)
+exit_program_btn = Button(root, text="EXIT PROGRAM", command=exit_program, padx=20, pady=10).grid(row=5, column=0)
 
 menu()
 
