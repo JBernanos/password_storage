@@ -11,39 +11,6 @@ root.title('Password Storage')
 
 
 def menu():
-    # try:
-    #     option = int(input('==================================== \n1- NEW RECORD(AUTO GENERATED PASSWORD) \n2- NEW RECORD \n3- EDIT A RECORD \n4- DELETE A RECORD \n5- CONSULT YOUR RECORDS \n6- QUIT \nCHOOSE ONE OPTION: '))
-    #     print('====================================')
-
-    #     if option == 1:
-    #         data()
-
-    #     elif option == 2:
-    #         add_record()
-
-    #     elif option == 3:
-    #         edit_record()
-
-    #     elif option == 4:
-    #         marker = 0  # this variable name need to be changed
-    #         delete_record(marker)
-
-    #     elif option == 5:
-    #         show_records()
-
-    #     elif option == 6:
-    #         print('Shutting the program down, wait a second.')
-    #         sleep(0.5)
-
-    #     else:
-    #         print('ERROR')
-    #         menu()
-
-    # except ValueError:
-    #     print('Incorrect input, you will be redirected to menu.')
-    #     sleep(0.5)
-    #     menu()
-
     print('==================================== \n1- NEW RECORD(AUTO GENERATED PASSWORD) \n2- NEW RECORD' 
     '\n3- EDIT A RECORD \n4- DELETE A RECORD \n5- CONSULT YOUR RECORDS \n6- QUIT \nCHOOSE ONE OPTION: ')
     print('====================================')
