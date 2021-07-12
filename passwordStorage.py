@@ -1,51 +1,57 @@
+import sys
+from tkinter import *
 from random import randint
 from time import sleep
 
+root = Tk()
+root.title('Password Storage')
 """
     Just a simple menu, where user choose what to do.
 """
 
 
 def menu():
-    try:
-        option = int(input('==================================== \n1- NEW RECORD(AUTO GENERATED PASSWORD) \n2- NEW RECORD \n3- EDIT A RECORD \n4- DELETE A RECORD \n5- CONSULT YOUR RECORDS \n6- QUIT \nCHOOSE ONE OPTION: '))
-        print('====================================')
+    # try:
+    #     option = int(input('==================================== \n1- NEW RECORD(AUTO GENERATED PASSWORD) \n2- NEW RECORD \n3- EDIT A RECORD \n4- DELETE A RECORD \n5- CONSULT YOUR RECORDS \n6- QUIT \nCHOOSE ONE OPTION: '))
+    #     print('====================================')
 
-        if option == 1:
-            data()
+    #     if option == 1:
+    #         data()
 
-        elif option == 2:
-            add_record()
+    #     elif option == 2:
+    #         add_record()
 
-        elif option == 3:
-            edit_record()
+    #     elif option == 3:
+    #         edit_record()
 
-        elif option == 4:
-            marker = 0  # this variable name need to be changed
-            delete_record(marker)
+    #     elif option == 4:
+    #         marker = 0  # this variable name need to be changed
+    #         delete_record(marker)
 
-        elif option == 5:
-            show_records()
+    #     elif option == 5:
+    #         show_records()
 
-        elif option == 6:
-            print('Shutting the program down, wait a second.')
-            sleep(0.5)
+    #     elif option == 6:
+    #         print('Shutting the program down, wait a second.')
+    #         sleep(0.5)
 
-        else:
-            print('ERROR')
-            menu()
+    #     else:
+    #         print('ERROR')
+    #         menu()
 
-    except ValueError:
-        print('Incorrect input, you will be redirected to menu.')
-        sleep(0.5)
-        menu()
+    # except ValueError:
+    #     print('Incorrect input, you will be redirected to menu.')
+    #     sleep(0.5)
+    #     menu()
+
+    print('==================================== \n1- NEW RECORD(AUTO GENERATED PASSWORD) \n2- NEW RECORD' 
+    '\n3- EDIT A RECORD \n4- DELETE A RECORD \n5- CONSULT YOUR RECORDS \n6- QUIT \nCHOOSE ONE OPTION: ')
+    print('====================================')
 
 
 """
     In data() we have the data needed to create the password.
 """
-
-
 def data():
     lowercase_letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
                          'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -62,8 +68,6 @@ def data():
 """
     In password_length() user enter the password length, this function force the length be greater than 8.
 """
-
-
 def password_length():
     try:
         length = int(input('Choose the length for your password: '))
@@ -84,13 +88,8 @@ def password_length():
 
 """
     In create_password() a random password is generated, the password should have at least 2 values from each data type defined on data(), this validation is made by the counters(1~4).
-"""
-
-"""
     TODO: position variable should be increased inside the "insert" functions
 """
-
-
 def create_password(uppercase_letters, lowercase_letters, numbers, special_characters, password, length):
     counter1 = counter2 = counter3 = counter4 = 0
     position = 0
@@ -171,8 +170,6 @@ def insert_special_characters(special_characters, password, position):
 """
     In list_to_string() the array is converted into a string(function avaliable in: https://www.geeksforgeeks.org/python-program-to-convert-a-list-to-string/).
 """
-
-
 def list_to_string(password):
     string = ""
 
@@ -185,8 +182,6 @@ def list_to_string(password):
 """
     In store_password() user will choose the record name and a login, after that we store all the data into a txt file(data.txt). 
 """
-
-
 def store_password(password):
     print('====================================')
     record_name = str(input('Record Name: ')).upper()
@@ -204,8 +199,6 @@ def store_password(password):
 """
     The add_record() function is used to storage a record that is already created, the user need to enter a password, after that the function store_password() is called.
 """
-
-
 def add_record():
     password = str(input('Password: '))
     store_password(password)
@@ -214,8 +207,6 @@ def add_record():
 """
     In edit_record() the record choosed by the user will be deleted, after that the option function is called.
 """
-
-
 def edit_record():
     marker = 1  # this variable name need to be changed
     delete_record(marker)
@@ -226,8 +217,6 @@ def edit_record():
 """
     In this function user choose between a AGP or his own password.
 """
-
-
 def option():
     choose = int(
         input('1- Auto Generated Password \n2- Type your own password \nChoose:'))
@@ -246,8 +235,6 @@ def option():
 """
     In delete_record() user will choose the record to be deleted, and this record will be removed from data.txt.
 """
-
-
 def delete_record(marker):
     record_name = str(
         input('Enter the name of the record to be deleted: ')).upper()
@@ -280,10 +267,16 @@ def delete_record(marker):
 
 
 """
+    This function name and idea need to be rethought, the marker variable indicates if when delete_record is called
+    the program needs to delete and edit that record or just delete it.
+"""
+def only_delete_record(): 
+    marker = 0
+    delete_record(marker)
+
+"""
     In show_records() we show all the records in data.txt file to the user.
 """
-
-
 def show_records():
     with open('data.txt', 'r') as file:
         print(file.read())
@@ -292,4 +285,29 @@ def show_records():
     menu()
 
 
+"""
+    In this function the Tkinter root will be closed, and the program will shut down.
+"""
+def exit_program():
+    root.quit()
+    print('\nShutting the program down, wait a second.')
+    sleep(0.5)
+    sys.exit()
+
+
+# Defining the tkinter buttons
+new_record_apg_btn = Button(root, text="NEW RECORD(APG)", command=data, padx=20, pady=10).grid(row=0, column=0)
+
+new_record_btn = Button(root, text="NEW RECORD", command=add_record, padx=20, pady=10).grid(row=1, column=0)
+
+edit_record_btn = Button(root, text="EDIT RECORD", command=edit_record, padx=20, pady=10).grid(row=2, column=0)
+
+delete_record_btn = Button(root, text="DELETE RECORD", command=only_delete_record, padx=20, pady=10).grid(row=3, column=0)
+
+show_record_btn = Button(root, text="SHOW RECORDS", command=show_records, padx=20, pady=10).grid(row=4, column=0)
+
+exit_program_btn = Button(root, text="EXIT PROGRAM", command=exit_program, padx=20, pady=10).grid(row=5, column=10)
+
 menu()
+
+root.mainloop()
