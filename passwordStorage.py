@@ -5,11 +5,10 @@ from time import sleep
 
 root = Tk()
 root.title('Password Storage')
+
 """
     Just a simple menu, where user choose what to do.
 """
-
-
 def menu():
     print('==================================== \n1- NEW RECORD(AUTO GENERATED PASSWORD) \n2- NEW RECORD' 
     '\n3- EDIT A RECORD \n4- DELETE A RECORD \n5- CONSULT YOUR RECORDS \n6- QUIT \nCHOOSE ONE OPTION: ')
