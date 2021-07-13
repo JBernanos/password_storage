@@ -278,6 +278,3 @@ exit_program_btn = Button(root, text="EXIT PROGRAM", command=exit_program, padx=
 menu()
 
 root.mainloop()
-
-
-#test test test
