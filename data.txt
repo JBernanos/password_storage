@@ -1,8 +1,0 @@
-Record Name: TEST2 
-Login: Test2 
-Password: VD81?z+u8b(c 
-====================================
-Record Name: TEST3 
-Login: Test3 
-Password: 89.fT*Sl54Bd 
-====================================
