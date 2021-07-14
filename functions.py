@@ -1,7 +1,8 @@
 import sys
 from time import sleep
 from random import randint
-from tkinter import*
+from tkinter import *
+from tkinter import filedialog 
 from tkinter import messagebox
 
 def data():
@@ -180,21 +181,30 @@ def delete_record():
                 counter -= 1
 
     if record_on_data == 1:
-        print('Record successfully removed!')
+        sucess_msg()
 
     else:
-        print('Record not found!')
+        fail_msg()
 
 
-def show_records(): #review message box
-    with open('data.txt', 'r') as file:
-        test = file.read()
-        messagebox.showinfo("Records", test)
-    sleep(0.5)
+def show_records(): 
+    top = Toplevel()
+    top['bg']='#fb0'
+
+    txtarea = Text(top, width=40, height=20)
+    txtarea.pack(pady=20)
+    
+    file = "C:/Users/jpb/Desktop/JPB/RandomCodes/python/password_storage/data.txt" #change this
+    file = open(file)
+    data = file.read()
+    txtarea.insert(END, data)
+    file.close()
 
 
-def exit_program():
-    root.quit()
-    print('\nShutting the program down, wait a second.')
-    sleep(0.5)
-    sys.exit()
+def sucess_msg():
+    messagebox.showinfo("Delete Record", "Record Sucesseful removed!")
+
+
+def fail_msg():
+    messagebox.showinfo("Delete Record", "Record not found!")
+
