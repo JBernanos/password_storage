@@ -1,24 +1,10 @@
 import sys
-from tkinter import *
-from tkinter import messagebox
-from random import randint
 from time import sleep
+from random import randint
+from tkinter import *
+from tkinter import filedialog 
+from tkinter import messagebox
 
-root = Tk()
-root.title('Password Storage')
-
-"""
-    Just a simple menu, where user choose what to do.
-"""
-def menu():
-    print('==================================== \n1- NEW RECORD(AUTO GENERATED PASSWORD) \n2- NEW RECORD' 
-    '\n3- EDIT A RECORD \n4- DELETE A RECORD \n5- CONSULT YOUR RECORDS \n6- QUIT \nCHOOSE ONE OPTION: ')
-    print('====================================')
-
-
-"""
-    In data() we have the data needed to create the password.
-"""
 def data():
     lowercase_letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
                          'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -32,9 +18,6 @@ def data():
                     special_characters, password, length)
 
 
-"""
-    In password_length() user enter the password length, this function force the length be greater than 8.
-"""
 def password_length():
     try:
         length = int(input('Choose the length for your password: '))
@@ -50,13 +33,8 @@ def password_length():
     except ValueError:
         print('Incorrect input, you will be redirected to menu.')
         sleep(0.5)
-        menu()
 
 
-"""
-    In create_password() a random password is generated, the password should have at least 2 values from each data type defined on data(), this validation is made by the counters(1~4).
-    TODO: position variable should be increased inside the "insert" functions
-"""
 def create_password(uppercase_letters, lowercase_letters, numbers, special_characters, password, length):
     counter1 = counter2 = counter3 = counter4 = 0
     position = 0
@@ -134,9 +112,6 @@ def insert_special_characters(special_characters, password, position):
     return password
 
 
-"""
-    In list_to_string() the array is converted into a string(function avaliable in: https://www.geeksforgeeks.org/python-program-to-convert-a-list-to-string/).
-"""
 def list_to_string(password):
     string = ""
 
@@ -146,9 +121,6 @@ def list_to_string(password):
     return string
 
 
-"""
-    In store_password() user will choose the record name and a login, after that we store all the data into a txt file(data.txt). 
-"""
 def store_password(password):
     print('====================================')
     record_name = str(input('Record Name: ')).upper()
@@ -160,30 +132,19 @@ def store_password(password):
         file.write('====================================\n')
 
     sleep(0.5)
-    menu()
 
 
-"""
-    The add_record() function is used to storage a record that is already created, the user need to enter a password, after that the function store_password() is called.
-"""
 def add_record():
     password = str(input('Password: '))
     store_password(password)
 
 
-"""
-    In edit_record() the record choosed by the user will be deleted, after that the option function is called.
-"""
 def edit_record():
-    marker = 1  # this variable name need to be changed
-    delete_record(marker)
+    delete_record()
     print('====================================')
     option()
 
 
-"""
-    In this function user choose between a AGP or his own password.
-"""
 def option():
     choose = int(
         input('1- Auto Generated Password \n2- Type your own password \nChoose:'))
@@ -198,11 +159,8 @@ def option():
         choose = 0
         option()
 
-
-"""
-    In delete_record() user will choose the record to be deleted, and this record will be removed from data.txt.
-"""
-def delete_record(marker):
+    
+def delete_record():
     record_name = str(
         input('Enter the name of the record to be deleted: ')).upper()
     record_on_data = 0
@@ -223,58 +181,30 @@ def delete_record(marker):
                 counter -= 1
 
     if record_on_data == 1:
-        print('Record successfully removed!')
+        sucess_msg()
 
     else:
-        print('Record not found!')
-        menu()
-
-    if marker == 0:
-        menu()
+        fail_msg()
 
 
-"""
-    This function name and idea need to be rethought, the marker variable indicates if when delete_record is called
-    the program needs to delete and edit that record or just delete it.
-"""
-def only_delete_record(): 
-    marker = 0
-    delete_record(marker)
+def show_records(): 
+    top = Toplevel()
+    top['bg']='#fb0'
 
-"""
-    In show_records() we show all the records in data.txt file to the user.
-"""
-def show_records(): #review message box
-    with open('data.txt', 'r') as file:
-        test = file.read()
-        messagebox.showinfo("Records", test)
-    sleep(0.5)
-    menu()
-
-"""
-    In this function the Tkinter root will be closed, and the program will shut down.
-"""
-def exit_program():
-    root.quit()
-    print('\nShutting the program down, wait a second.')
-    sleep(0.5)
-    sys.exit()
+    txtarea = Text(top, width=40, height=20)
+    txtarea.pack(pady=20)
+    
+    file = "C:/Users/jpb/Desktop/JPB/RandomCodes/python/password_storage/data.txt" #change this
+    file = open(file)
+    data = file.read()
+    txtarea.insert(END, data)
+    file.close()
 
 
-# Defining the tkinter buttons
-new_record_apg_btn = Button(root, text="NEW RECORD(APG)", command=data, padx=20, pady=10).grid(row=0, column=0)
-
-new_record_btn = Button(root, text="NEW RECORD", command=add_record, padx=20, pady=10).grid(row=1, column=0)
-
-edit_record_btn = Button(root, text="EDIT RECORD", command=edit_record, padx=20, pady=10).grid(row=2, column=0)
-
-delete_record_btn = Button(root, text="DELETE RECORD", command=delete_record, padx=20, pady=10).grid(row=3, column=0)
-
-show_record_btn = Button(root, text="SHOW RECORDS", command=show_records, padx=20, pady=10).grid(row=4, column=0)
-
-exit_program_btn = Button(root, text="EXIT PROGRAM", command=exit_program, padx=20, pady=10).grid(row=5, column=0)
+def sucess_msg():
+    messagebox.showinfo("Delete Record", "Record Sucesseful removed!")
 
 
-menu()
+def fail_msg():
+    messagebox.showinfo("Delete Record", "Record not found!")
 
-root.mainloop()
