@@ -1,4 +1,0 @@
-Record Name: TESTE2 
-Login: Teste2 
-Password: SenHadoteste2 
-====================================
