@@ -16,7 +16,6 @@ container.grid(row=0, column=0)
 def exit_program():
     root.quit()
     print('\nShutting the program down, wait a second.')
-    # sleep(0.5)
     sys.exit()
 
 new_record_apg_btn = Button(container, text="NEW RECORD(APG)", command=agp_password, padx=20, pady=10, width=20).grid(row=0, column=0)
