@@ -22,7 +22,7 @@ new_record_apg_btn = Button(container, text="NEW RECORD(APG)", command=agp_passw
 
 new_record_btn = Button(container, text="NEW RECORD", command=not_agp_password, padx=20, pady=10, width=20).grid(row=1, column=0)
 
-# edit_record_btn = Button(container, text="EDIT RECORD", command=change_record, padx=20, pady=10, width=20).grid(row=2, column=0)
+# edit_record_btn = Button(container, text="EDIT RECORD", command=change_record, padx=20, pady=10, width=20).grid(row=2, column=0) TODO: Create edit_record function
 
 delete_record_btn = Button(container, text="DELETE RECORD", command=delete_record, padx=20, pady=10, width=20).grid(row=3, column=0)
 
